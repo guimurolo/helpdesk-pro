@@ -80,3 +80,34 @@ def test_cadastrar_chamado_sem_titulo():
     )
 
     assert response.status_code == 422
+
+@pytest.mark.parametrize("campo_ausente", [
+    "titulo",
+    "descricao",
+    "prioridade"
+])
+def test_chamado_com_campo_ausente(campo_ausente):
+    dados = {
+        "titulo": "Erro no sistema",
+        "descricao": "Não consigo acessar",
+        "prioridade": "Alta"
+    }
+
+    del dados[campo_ausente]
+
+    with pytest.raises(ValidationError):
+        Chamado(**dados)
+
+@pytest.mark.parametrize("titulo", [
+    "",
+    " ",
+    "   "
+])
+
+def test_chamado_com_titulo_vazio(titulo):
+    with pytest.raises(ValidationError):
+        Chamado(
+            titulo=titulo,
+            descricao="Não consigo acessar o sistema",
+            prioridade="Alta"
+        )
