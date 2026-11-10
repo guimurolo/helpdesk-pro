@@ -1,8 +1,11 @@
-
-from fastapi import FastAPI
+from fastapi import FastAPI, Request
+from fastapi.staticfiles import StaticFiles
+from fastapi.templating import Jinja2Templates
+from pathlib import Path
 
 from app.chamado import Chamado
 
+BASE_DIR = Path(__file__).resolve().parent.parent
 
 app = FastAPI(
     title="HelpDesk Pro",
@@ -10,13 +13,22 @@ app = FastAPI(
     version="1.0.0"
 )
 
+app.mount(
+    "/static",
+    StaticFiles(directory=BASE_DIR / "static"),
+    name="static"
+)
+
+templates = Jinja2Templates(directory=BASE_DIR / "templates")
+
 
 @app.get("/")
-def home():
-    return {
-        "mensagem": "Bem-vindo ao HelpDesk Pro!",
-        "status": "online"
-    }
+def home(request: Request):
+    return templates.TemplateResponse(
+        request=request,
+        name="index.html",
+        context={}
+    )
 
 @app.get("/chamados")
 def listar_chamados():

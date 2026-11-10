@@ -1,0 +1,56 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HelpDesk Pro</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+
+    <header>
+        <h1>HelpDesk Pro</h1>
+        <p>Central de atendimento e suporte técnico</p>
+    </header>
+
+    <main>
+        <section>
+            <h2>Abrir novo chamado</h2>
+            <p>Preencha os dados abaixo para solicitar suporte.</p>
+
+            <form id="form-chamado">
+
+                <label for="titulo">Título do chamado</label\n>
+                <input
+                    type="text"
+                    id="titulo"
+                    name="titulo"
+                    placeholder="Ex: Erro ao acessar o sistema"
+                    required
+                >
+
+                <label for="descricao">Descrição do problema</label>
+                <textarea
+                    id="descricao"
+                    name="descricao"
+                    placeholder="Descreva o problema encontrado..."
+                    required
+                ></textarea>
+
+                <label for="prioridade">Prioridade</label\n>
+                <select id="prioridade" name="prioridade" required>
+                    <option value="">Selecione a prioridade</option>
+                    <option value="Baixa">Baixa</option>
+                    <option value="Média">Média</option>
+                    <option value="Alta">Alta</option>
+                </select>
+
+                <button type="submit">Enviar chamado</button>
+
+            </form>
+        </section>
+    </main>
+
+</body>
+</html>

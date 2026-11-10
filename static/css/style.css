@@ -1,0 +1,131 @@
+
+/* Configurações gerais da aplicação */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Aparência principal */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f1f5f9;
+    color: #1e293b;
+    min-height: 100vh;
+}
+
+
+/* Cabeçalho da aplicação */
+header {
+    background-color: #1e3a8a;
+    color: #ffffff;
+    padding: 30px 40px;
+    text-align: center;
+}
+
+/* Título principal */
+header h1 {
+    font-size: 30px;
+    margin-bottom: 8px;
+}
+
+/* Subtítulo */
+header p {
+    font-size: 15px;
+    color: #dbeafe;
+}
+
+/* Área principal */
+main {
+    max-width: 800px;
+    margin: 40px auto;
+    padding: 0 20px;
+}
+
+/* Seção do formulário */
+section {
+    background-color: #ffffff;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+}
+
+/* Título da seção */
+section h2 {
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+/* Texto de orientação */
+section p {
+    color: #64748b;
+    margin-bottom: 25px;
+}
+
+
+/* Formulário */
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+/* Identificação dos campos */
+form label {
+    font-weight: bold;
+    font-size: 14px;
+    margin-top: 10px;
+}
+
+/* Campos de entrada */
+form input,
+form textarea,
+form select {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #cbd5e1;
+    border-radius: 6px;
+    font-size: 14px;
+    font-family: Arial, sans-serif;
+    background-color: #ffffff;
+}
+
+/* Campo de descrição */
+form textarea {
+    min-height: 120px;
+    resize: vertical;
+}
+
+/* Destaque ao selecionar um campo */
+form input:focus,
+form textarea:focus,
+form select:focus {
+    outline: none;
+    border-color: #2563eb;
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.12);
+}
+
+
+/* Botão de envio */
+form button {
+    background-color: #2563eb;
+    color: #ffffff;
+    padding: 14px;
+    border: none;
+    border-radius: 6px;
+    font-size: 15px;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 15px;
+    transition: background-color 0.3s ease;
+}
+
+/* Efeito ao passar o mouse */
+form button:hover {
+    background-color: #1d4ed8;
+}
+
+/* Efeito ao pressionar */
+form button:active {
+    transform: scale(0.98);
+}
