@@ -12,14 +12,13 @@ from pydantic import ValidationError
 client = TestClient(app)
 
 
+
 def test_pagina_inicial():
     response = client.get("/")
 
     assert response.status_code == 200
-    assert response.json() == {
-        "mensagem": "Bem-vindo ao HelpDesk Pro!",
-        "status": "online"
-    }
+    assert "text/html" in response.headers["content-type"]
+    assert "HelpDesk Pro" in response.text
 
 
 def test_sobre_projeto():
