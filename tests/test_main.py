@@ -110,3 +110,57 @@ def test_chamado_com_titulo_vazio(titulo):
             descricao="Não consigo acessar o sistema",
             prioridade="Alta"
         )
+
+def test_cadastrar_chamado_com_titulo_vazio():
+    response = client.post(
+        "/chamados",
+        json={
+            "titulo": "   ",
+            "descricao": "Não consigo acessar o sistema",
+            "prioridade": "Alta"
+        }
+    )
+
+    assert response.status_code == 422
+
+def test_cadastrar_chamado_com_descricao_vazia():
+    response = client.post(
+        "/chamados",
+        json={
+            "titulo": "Erro no sistema",
+            "descricao": "   ",
+            "prioridade": "Alta"
+        }
+    )
+
+    assert response.status_code == 422
+
+def test_cadastrar_chamado_com_prioridade_invalida():
+    response = client.post(
+        "/chamados",
+        json={
+            "titulo": "Erro no sistema",
+            "descricao": "Não consigo acessar o sistema",
+            "prioridade": "Urgente"
+        }
+    )
+
+    assert response.status_code == 422
+
+@pytest.mark.parametrize("campo_ausente", [
+    "titulo",
+    "descricao",
+    "prioridade"
+])
+def test_cadastrar_chamado_com_campo_ausente(campo_ausente):
+    dados = {
+        "titulo": "Erro no sistema",
+        "descricao": "Não consigo acessar o sistema",
+        "prioridade": "Alta"
+    }
+
+    del dados[campo_ausente]
+
+    response = client.post("/chamados", json=dados)
+
+    assert response.status_code == 422
