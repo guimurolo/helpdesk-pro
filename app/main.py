@@ -1,9 +1,11 @@
+
 from fastapi import FastAPI, Request
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
 from pathlib import Path
 
 from app.chamado import Chamado
+from database.chamados_repository import criar_chamado, listar_chamados
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -30,26 +32,47 @@ def home(request: Request):
         context={}
     )
 
-@app.get("/chamados")
-def listar_chamados():
-    return {
-        "chamados": [
-            {"id": 1, "titulo": "Computador não liga"},
-            {"id": 2, "titulo": "Erro no sistema"}
-        ]
 
-}
+@app.get("/chamados")
+def listar_chamados_api():
+    chamados = listar_chamados()
+
+    return [
+        {
+            "id": chamado[0],
+            "titulo": chamado[1],
+            "descricao": chamado[2],
+            "prioridade": chamado[3],
+            "criado_em": chamado[4]
+        }
+        for chamado in chamados
+    ]
+
+
+@app.post("/chamados")
+def cadastrar_chamado(chamado: Chamado):
+    resultado = criar_chamado(
+        chamado.titulo,
+        chamado.descricao,
+        chamado.prioridade
+    )
+
+    return {
+        "mensagem": "Chamado criado com sucesso!",
+        "chamado": {
+            "id": resultado[0],
+            "titulo": resultado[1],
+            "descricao": resultado[2],
+            "prioridade": resultado[3],
+            "criado_em": resultado[4]
+        }
+    }
+
+
 @app.get("/sobre")
 def sobre():
     return {
-    "projeto": "HelpDesk Pro",
-    "objetivo": "Gerenciamento de chamados",
-    "responsavel": "Guilherme"
-}
-
-@app.post("/chamados")
-def criar_chamado(chamado: Chamado):
-    return {
-        "mensagem": "Chamado criado com sucesso!",
-        "chamado": chamado
+        "projeto": "HelpDesk Pro",
+        "objetivo": "Gerenciamento de chamados",
+        "responsavel": "Guilherme"
     }
