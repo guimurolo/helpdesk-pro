@@ -19,3 +19,6 @@ __pycache__/
 # Cache e arquivos compilados do Python
 __pycache__/
 *.py[cod]
+
+# Relatorios de testes gerados localmente
+reports/
