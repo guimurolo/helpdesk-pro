@@ -2,12 +2,15 @@
 from fastapi.testclient import TestClient
 
 from app.main import app
+import app.main as main
 
 from app.chamado import Chamado
 
 import pytest 
 from pydantic import ValidationError
 
+
+pytestmark = pytest.mark.unit
 
 client = TestClient(app)
 
@@ -55,7 +58,22 @@ def test_chamado_sem_titulo():
             prioridade="Alta"
         )
 
-def test_cadastrar_chamado():
+def test_cadastrar_chamado(monkeypatch):
+    def criar_chamado_fake(titulo, descricao, prioridade):
+        return (
+            1,
+            titulo,
+            descricao,
+            prioridade,
+            "2026-11-18 10:00:00"
+        )
+
+    monkeypatch.setattr(
+        main,
+        "criar_chamado",
+        criar_chamado_fake
+    )
+
     response = client.post(
         "/chamados",
         json={
