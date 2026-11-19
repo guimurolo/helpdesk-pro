@@ -205,3 +205,7 @@ Este projeto tem como objetivo consolidar conhecimentos em:
 Projeto desenvolvido para fins de aprendizado e construção de portfólio profissional na área de tecnologia, com direcionamento para Quality Assurance (QA) e Testes de Software.
 
 [GitHub — guimurolo](https://github.com/guimurolo)
+
+## Status do projeto
+
+Aplicação publicada no Render, com PostgreSQL hospedado no Neon e pipeline de CI/CD configurado.
